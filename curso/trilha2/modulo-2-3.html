@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modulo 2.3 - Templates de prompt | DeepClaudeX</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',sans-serif}.dark body{background-color:#111827}html:not(.dark) body{background-color:#f8fafc}html:not(.dark) .bg-dark-900{background-color:#fff}html:not(.dark) .bg-dark-800{background-color:#f9fafb}html:not(.dark) .bg-dark-700{background-color:#f3f4f6}html:not(.dark) .bg-dark-600{background-color:#e5e7eb}html:not(.dark) .text-neutral-100{color:#111827}html:not(.dark) .text-neutral-300{color:#4b5563}html:not(.dark) .text-neutral-400{color:#6b7280}html:not(.dark) .text-neutral-500{color:#9ca3af}html:not(.dark) .border-dark-600{border-color:#d1d5db}html:not(.dark) .border-dark-700{border-color:#e5e7eb}html:not(.dark) .text-blue-400{color:#2563eb}html:not(.dark) .bg-blue-500\/20{background-color:rgba(37,99,235,.12)}html:not(.dark) .bg-blue-500\/10{background-color:rgba(37,99,235,.08)}html:not(.dark) .border-blue-500\/30{border-color:rgba(37,99,235,.25)}html:not(.dark) .bg-blue-900\/20{background-color:rgba(37,99,235,.06)}html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb}html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08)}html:not(.dark) .text-emerald-400{color:#059669}html:not(.dark) .bg-emerald-900\/20{background-color:rgba(5,150,105,.06)}html:not(.dark) .border-emerald-500\/30{border-color:rgba(5,150,105,.25)}html:not(.dark) .hover\:text-emerald-400:hover{color:#059669}html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08)}html:not(.dark) .text-purple-400{color:#7c3aed}html:not(.dark) .bg-purple-900\/20{background-color:rgba(124,58,237,.06)}html:not(.dark) .border-purple-500\/30{border-color:rgba(124,58,237,.25)}html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed}html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08)}html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important}html:not(.dark) .text-primary{color:#a16207}html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08)}html:not(.dark) .border-primary\/40{border-color:rgba(161,98,7,.25)}html:not(.dark) .text-sky-400{color:#0369a1}html:not(.dark) .text-yellow-400{color:#a16207}html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7}html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e}html:not(.dark) .text-red-400{color:#dc2626}html:not(.dark) .bg-red-900\/20{background-color:rgba(220,38,38,.06)}html:not(.dark) .border-red-500\/30{border-color:rgba(220,38,38,.25)}html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95)}</style></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">DeepClaudeX</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Conceito</span></a><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Configuracao</span></a><a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Projetos</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"/></svg></button></div></div></div></nav>
+
+<nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4"><div class="flex items-center space-x-2 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-blue-400">Inicio</a><span>/</span><a href="index.html" class="hover:text-blue-400">Trilha 2</a><span>/</span><span class="text-blue-400">Modulo 2.3</span></div></nav>
+
+<header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MODULO 2.3</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">📝 Templates de prompt por papel</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">Prompts copiaveis para cada modelo. O system prompt certo faz cada modelo brilhar no papel dele.</p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Topicos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">30</div><div class="text-xs text-neutral-400">Minutos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Pratico</div><div class="text-xs text-neutral-400">Nivel</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Templates</div><div class="text-xs text-neutral-400">Tipo</div></div>
+</div></div></header>
+
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+<section id="t1" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span><h2 class="text-2xl font-bold">🏛️ Prompt do arquiteto (GPT-5.5)</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Output estruturado: lista de arquivos, ordem de implementacao, criterios de aceitacao, riscos.</p>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-3">Template</h3>
+<div class="bg-dark-900/50 rounded p-4 font-mono text-xs text-neutral-300 overflow-x-auto"><pre>Voce e arquiteto de software. Quebre a feature em plano implementavel.
+
+CONTEXTO:
+- Stack: [Next.js 15, Postgres, Tailwind]
+- Padroes: [veja CLAUDE.md]
+
+FEATURE PEDIDA:
+[descricao da feature]
+
+OUTPUT (em markdown):
+1. Arquivos a criar/modificar (caminho + responsabilidade)
+2. Schema/tipos novos
+3. Ordem de implementacao com dependencias
+4. Riscos tecnicos e edge cases
+5. Criterios de aceitacao (como saber que terminou)
+
+Nao escreva codigo. So o plano.</pre></div></div></section>
+
+<section id="t2" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span><h2 class="text-2xl font-bold">🎨 Prompt do designer (Opus)</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Estimula julgamento, nao instrucoes mecanicas. Pede sugestoes em vez de comandar.</p>
+<div class="bg-purple-900/20 rounded-xl border border-purple-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-purple-400 mb-3">Template</h3>
+<div class="bg-dark-900/50 rounded p-4 font-mono text-xs text-neutral-300 overflow-x-auto"><pre>Voce e product designer revisando UX antes da implementacao.
+
+CONTEXTO:
+- Produto: [SaaS de gestao para PMEs brasileiras]
+- Tom: [profissional mas acolhedor]
+- Publico: [donos de negocio nao-tecnicos]
+
+PEDIDO:
+[descricao das telas/fluxos a refinar]
+
+REVISE:
+- Copy: headlines, CTAs, microcopy. Esta claro? Converte?
+- Hierarquia: o que destacar primeiro? O que esconder?
+- Estados: vazio, loading, erro, sucesso. Faltou algum?
+- Friccao: que passo o usuario provavelmente ira odiar?
+
+Sugira melhorias com justificativa breve. Maximo 5 sugestoes.</pre></div></div></section>
+
+<section id="t3" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span><h2 class="text-2xl font-bold">⚡ Prompt do executor (DeepSeek)</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Minimalista, fechado, anti-criatividade. DeepSeek com prompt aberto inventa demais.</p>
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-3">Template</h3>
+<div class="bg-dark-900/50 rounded p-4 font-mono text-xs text-neutral-300 overflow-x-auto"><pre>Implemente exatamente o plano abaixo. Nao questione, nao melhore,
+nao sugira alternativas. Se houver duvida sobre algum item,
+PARE e pergunte antes de prosseguir.
+
+PLANO:
+[colar PLAN.md aqui]
+
+CONTEXTO DE CODIGO:
+[colar arquivos relevantes]
+
+Implementacao:
+- 1 commit por arquivo modificado
+- Mensagens de commit no formato "feat: ...", "fix: ...", etc
+- Nao adicione features nao mencionadas no plano
+- Nao mude estilo de codigo do projeto</pre></div></div></section>
+
+<section id="t4" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span><h2 class="text-2xl font-bold">🔍 Prompt do revisor</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Passa plano + diff. Pede output em checklist com severidade.</p>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-3">Template</h3>
+<div class="bg-dark-900/50 rounded p-4 font-mono text-xs text-neutral-300 overflow-x-auto"><pre>Audite o codigo abaixo contra o plano original.
+
+PLANO ORIGINAL:
+[colar PLAN.md]
+
+DIFF IMPLEMENTADO:
+[colar git diff]
+
+OUTPUT (checklist):
+- [ ] Aderiu ao plano? Diferencas?
+- [ ] Bugs evidentes? (off-by-one, null, race)
+- [ ] Risco de seguranca? (XSS, SQL injection, auth)
+- [ ] Performance? (N+1, loops, memo)
+- [ ] Edge cases cobertos?
+- [ ] Naming consistente?
+- [ ] Testes presentes e validos?
+- [ ] Documentacao minima?
+
+Para cada problema: severidade (CRITICA/ALTA/MEDIA) + arquivo:linha.
+Recomende: APROVAR / AJUSTAR / REPLANEJAR.</pre></div></div></section>
+
+<section id="t5" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span><h2 class="text-2xl font-bold">📚 Biblioteca de snippets reutilizaveis</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Pasta /prompts/ com arquivos versionados em git. Time inteiro usa os mesmos prompts.</p>
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-3">Estrutura recomendada</h3>
+<div class="bg-dark-900/50 rounded p-4 font-mono text-xs text-emerald-400"><pre>prompts/
+├── plan.md          # arquiteto
+├── design.md        # opus
+├── implement.md     # executor
+├── review.md        # revisor
+├── refactor.md      # caso especial
+├── debug.md         # caso especial
+└── security-audit.md # pass especializado</pre></div>
+<p class="text-sm text-neutral-300 mt-3">Versionado em git, melhora com PR de quem identifica problema. Onboarding fica trivial.</p>
+</div></section>
+
+<section id="t6" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span><h2 class="text-2xl font-bold">✏️ Iterando o prompt: o que ajustar quando falha</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">3 ajustes resolvem 80% dos problemas. Saber qual aplicar acelera o ciclo.</p>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<ul class="space-y-3 text-neutral-300">
+<li><strong class="text-blue-400">Saida confusa:</strong> peca formato explicito ("output em markdown com headers H2 para cada secao").</li>
+<li><strong class="text-blue-400">Falta precisao:</strong> de 1-2 exemplos do output desejado (few-shot).</li>
+<li><strong class="text-blue-400">Inventa demais:</strong> adicione "se nao souber, fale 'nao sei'. Nao invente APIs nem bibliotecas".</li>
+<li><strong class="text-blue-400">Muito longo:</strong> "Seja conciso. Maximo X palavras" ou "use bullets".</li>
+<li><strong class="text-blue-400">Generico:</strong> adicione contexto de stack, padroes do projeto, restricoes especificas.</li>
+</ul></div></section>
+
+<section class="mb-12"><div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Modulo</h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Arquiteto (GPT-5.5):</strong> <span class="text-neutral-400">output estruturado em markdown, sem codigo</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Designer (Opus):</strong> <span class="text-neutral-400">prompt aberto, pede julgamento, sugestoes</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Executor (DeepSeek):</strong> <span class="text-neutral-400">fechado, anti-criatividade, "se duvida, pare"</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Revisor:</strong> <span class="text-neutral-400">contexto duplo (plano + diff), output em checklist</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Biblioteca em /prompts/:</strong> <span class="text-neutral-400">versionada em git, reuso em equipe</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">3 ajustes:</strong> <span class="text-neutral-400">formato, exemplo, anti-alucinacao</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8"><h3 class="font-semibold text-blue-400 mb-2">Proximo Modulo:</h3><p class="text-neutral-300">2.4 — 🔗 Passando contexto entre modelos</p></div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a href="modulo-2-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Modulo 2.2</a>
+<a href="modulo-2-4.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Proximo Modulo →</a>
+</div></div></section>
+
+</main>
+<footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>DeepClaudeX · Modulo 2.3 · INEMA.CLUB · 2026</p></div></footer>
+<script>const t=document.getElementById('theme-toggle'),d=document.getElementById('theme-toggle-dark-icon'),l=document.getElementById('theme-toggle-light-icon'),h=document.documentElement;if(localStorage.getItem('theme')==='light'){h.classList.remove('dark');d.classList.remove('hidden')}else{l.classList.remove('hidden')}t.addEventListener('click',()=>{d.classList.toggle('hidden');l.classList.toggle('hidden');h.classList.toggle('dark');localStorage.setItem('theme',h.classList.contains('dark')?'dark':'light')});</script>
+</body></html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modulo 2.5 - Workflow de revisao cruzada | DeepClaudeX</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',sans-serif}.dark body{background-color:#111827}html:not(.dark) body{background-color:#f8fafc}html:not(.dark) .bg-dark-900{background-color:#fff}html:not(.dark) .bg-dark-800{background-color:#f9fafb}html:not(.dark) .bg-dark-700{background-color:#f3f4f6}html:not(.dark) .bg-dark-600{background-color:#e5e7eb}html:not(.dark) .text-neutral-100{color:#111827}html:not(.dark) .text-neutral-300{color:#4b5563}html:not(.dark) .text-neutral-400{color:#6b7280}html:not(.dark) .text-neutral-500{color:#9ca3af}html:not(.dark) .border-dark-600{border-color:#d1d5db}html:not(.dark) .border-dark-700{border-color:#e5e7eb}html:not(.dark) .text-blue-400{color:#2563eb}html:not(.dark) .bg-blue-500\/20{background-color:rgba(37,99,235,.12)}html:not(.dark) .bg-blue-500\/10{background-color:rgba(37,99,235,.08)}html:not(.dark) .border-blue-500\/30{border-color:rgba(37,99,235,.25)}html:not(.dark) .bg-blue-900\/20{background-color:rgba(37,99,235,.06)}html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb}html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08)}html:not(.dark) .text-emerald-400{color:#059669}html:not(.dark) .bg-emerald-900\/20{background-color:rgba(5,150,105,.06)}html:not(.dark) .border-emerald-500\/30{border-color:rgba(5,150,105,.25)}html:not(.dark) .hover\:text-emerald-400:hover{color:#059669}html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08)}html:not(.dark) .text-purple-400{color:#7c3aed}html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed}html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08)}html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important}html:not(.dark) .text-primary{color:#a16207}html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08)}html:not(.dark) .border-primary\/40{border-color:rgba(161,98,7,.25)}html:not(.dark) .text-sky-400{color:#0369a1}html:not(.dark) .text-yellow-400{color:#a16207}html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7}html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e}html:not(.dark) .text-red-400{color:#dc2626}html:not(.dark) .bg-red-900\/20{background-color:rgba(220,38,38,.06)}html:not(.dark) .border-red-500\/30{border-color:rgba(220,38,38,.25)}html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95)}</style></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14"><div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">DeepClaudeX</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div><div class="flex items-center space-x-1 sm:space-x-2"><a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Conceito</span></a><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Configuracao</span></a><a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Projetos</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"/></svg></button></div></div></div></nav>
+
+<nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4"><div class="flex items-center space-x-2 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-blue-400">Inicio</a><span>/</span><a href="index.html" class="hover:text-blue-400">Trilha 2</a><span>/</span><span class="text-blue-400">Modulo 2.5</span></div></nav>
+
+<header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MODULO 2.5</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">✅ Workflow de revisao cruzada</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">O segredo da qualidade no setup multi-modelo: <strong class="text-blue-400">quem escreveu nao revisa</strong>. Como estruturar revisao automatica e quando aceitar/reverter.</p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Topicos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">30</div><div class="text-xs text-neutral-400">Minutos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Pratico</div><div class="text-xs text-neutral-400">Nivel</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Workflow</div><div class="text-xs text-neutral-400">Tipo</div></div>
+</div></div></header>
+
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+<section id="t1" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span><h2 class="text-2xl font-bold">🔁 Por que "quem escreveu nao revisa"</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Mesmo modelo que escreveu o codigo nao percebe seus proprios bugs (vies de confirmacao). Revisor diferente pega 60% mais issues.</p>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center"><span class="mr-2">🧠</span> Mecanismo</h3>
+<p class="text-neutral-300 text-sm">DeepSeek que escreveu codigo X tem o "esquema mental" daquela implementacao. Quando le seu proprio codigo, ele <em>preenche lacunas</em> mentalmente — assume que o codigo faz o que ele queria que fizesse, mesmo que o texto nao garanta isso. Modelo diferente le com mente fresca: ve o que esta escrito, nao o que era pra estar.</p>
+</div></section>
+
+<section id="t2" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span><h2 class="text-2xl font-bold">🔍 Checklist de revisao automatica</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Bugs, seguranca, performance, aderencia ao plano, edge cases, naming, tests, documentacao. 8 itens fixos para todo review.</p>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center"><span class="mr-2">📋</span> 8-point review</h3>
+<ol class="space-y-2 text-neutral-300 text-sm list-decimal list-inside">
+<li><strong>Bugs:</strong> off-by-one, null, undefined, race conditions</li>
+<li><strong>Seguranca:</strong> XSS, SQL injection, IDOR, auth bypass, leak de dados</li>
+<li><strong>Performance:</strong> N+1, loops ineficientes, memo faltante, leak de memoria</li>
+<li><strong>Aderencia:</strong> faz exatamente o que o plano pediu? sem extras?</li>
+<li><strong>Edge cases:</strong> empty state, max input, network error, rollback</li>
+<li><strong>Naming:</strong> consistente com o resto do projeto? autoexplicativo?</li>
+<li><strong>Testes:</strong> presentes? cobrem caminho infeliz? mock minimo?</li>
+<li><strong>Documentacao:</strong> comentarios em logica nao-obvia, sem ruido</li>
+</ol></div></section>
+
+<section id="t3" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span><h2 class="text-2xl font-bold">⏪ Quando aceitar e quando reverter</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Decisao binaria perde nuance. Trinario e mais fiel a realidade.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5 text-center"><div class="text-3xl mb-2">✓</div><h4 class="font-bold text-emerald-400 mb-2">APROVAR</h4><p class="text-xs text-neutral-300">Sem issues criticas/altas. Codigo segue o plano. Merge direto.</p></div>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5 text-center"><div class="text-3xl mb-2">⚠️</div><h4 class="font-bold text-blue-400 mb-2">AJUSTAR</h4><p class="text-xs text-neutral-300">Issues medias/altas pontuais. Volta para etapa 3 (DeepSeek corrige) com lista.</p></div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5 text-center"><div class="text-3xl mb-2">✗</div><h4 class="font-bold text-red-400 mb-2">REPLANEJAR</h4><p class="text-xs text-neutral-300">Issues criticas estruturais. Volta para etapa 1. Plano errou ou foi mal-interpretado.</p></div>
+</div></section>
+
+<section id="t4" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span><h2 class="text-2xl font-bold">🛡️ Revisao especializada: seguranca</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Em codigo que toca auth/payment/data, faz um segundo pass de revisao com prompt especifico de seguranca (OWASP, SQL injection, XSS, IDOR).</p>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center"><span class="mr-2">🔒</span> Pass de seguranca dedicado</h3>
+<div class="bg-dark-900/50 rounded p-4 font-mono text-xs text-neutral-300 overflow-x-auto"><pre>Voce e auditor de seguranca. Audite o diff abaixo
+contra OWASP Top 10 + checklist:
+
+- Injection (SQL, NoSQL, Command)
+- Broken auth (sessao, JWT, MFA)
+- Sensitive data exposure
+- XXE/XSS/SSRF
+- Broken access control (IDOR)
+- Security misconfiguration
+- CSRF
+- Logging sensivel/insuficiente
+
+Output: lista por severidade. Para CRITICA, pare a release.</pre></div></div></section>
+
+<section id="t5" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span><h2 class="text-2xl font-bold">🤖 Automatizar revisao no CI</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Action que roda em todo PR: pega o diff, manda para GPT-5.5/Opus revisar, comenta no PR. Funciona como tech lead robotico.</p>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center"><span class="mr-2">⚙️</span> GitHub Action minimo</h3>
+<div class="bg-dark-900/50 rounded p-4 font-mono text-xs text-emerald-400 overflow-x-auto"><pre>name: AI Review
+on: pull_request
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          DIFF=$(gh pr diff)
+          curl -s https://api.openai.com/v1/chat/completions \
+            -H "Authorization: Bearer $OPENAI_KEY" \
+            -d "{\"model\":\"gpt-5.5\",\"messages\":[
+              {\"role\":\"system\",\"content\":\"$(cat prompts/review.md)\"},
+              {\"role\":\"user\",\"content\":\"$DIFF\"}
+            ]}" | jq -r '.choices[0].message.content' > review.md
+          gh pr comment --body-file review.md</pre></div></div></section>
+
+<section id="t6" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span><h2 class="text-2xl font-bold">📝 Documentar decisoes que vieram da revisao</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Quando a revisao muda algo importante, registre o porque. ADRs (Architectural Decision Records) servem aos modelos futuros.</p>
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center"><span class="mr-2">📚</span> Template de ADR</h3>
+<div class="bg-dark-900/50 rounded p-4 font-mono text-xs text-neutral-300 overflow-x-auto"><pre># ADR 001: Por que NAO usamos JWT em sessoes
+
+## Contexto
+Revisao do PR #42 (auth) levantou risco de XSS leak.
+
+## Decisao
+Usar cookies httpOnly + session em DB, nao JWT em localStorage.
+
+## Consequencias
++ Resistente a XSS
++ Revogacao instantanea
+- Mais latencia (1 query por request)
+- Sticky session na infra
+
+## Status
+Aceito em 2026-04-15</pre></div></div></section>
+
+<section class="mb-12"><div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Modulo</h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Quem escreveu nao revisa:</strong> <span class="text-neutral-400">vies de confirmacao mata 60% das chances de detectar</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Checklist 8-point:</strong> <span class="text-neutral-400">bugs, seguranca, perf, plano, edges, naming, tests, docs</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">3 estados:</strong> <span class="text-neutral-400">aprovar, ajustar, replanejar</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Pass de seguranca:</strong> <span class="text-neutral-400">dedicado em codigo critico, OWASP top 10</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Automacao no CI:</strong> <span class="text-neutral-400">action comenta diff em todo PR</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">ADRs registram decisoes:</strong> <span class="text-neutral-400">memoria do projeto para modelos futuros</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8"><h3 class="font-semibold text-blue-400 mb-2">Proximo Modulo:</h3><p class="text-neutral-300">2.6 — 📊 Metricas, custo e otimizacao</p></div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a href="modulo-2-4.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Modulo 2.4</a>
+<a href="modulo-2-6.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Proximo Modulo →</a>
+</div></div></section>
+
+</main>
+<footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>DeepClaudeX · Modulo 2.5 · INEMA.CLUB · 2026</p></div></footer>
+<script>const t=document.getElementById('theme-toggle'),d=document.getElementById('theme-toggle-dark-icon'),l=document.getElementById('theme-toggle-light-icon'),h=document.documentElement;if(localStorage.getItem('theme')==='light'){h.classList.remove('dark');d.classList.remove('hidden')}else{l.classList.remove('hidden')}t.addEventListener('click',()=>{d.classList.toggle('hidden');l.classList.toggle('hidden');h.classList.toggle('dark');localStorage.setItem('theme',h.classList.contains('dark')?'dark':'light')});</script>
+</body></html>
