@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Modelo 70/20/10 | Curso DeepClaudeX</title>
+  <meta name="description" content="Como orquestrar GPT-5.5, Opus 4.7 e DeepSeek V4 com a estrategia 70/20/10 — qualidade, velocidade e economia.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    /* Light mode - base */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - emerald (T1) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-emerald-400 { color: #059669; }
+
+    /* Light mode - blue (T2) */
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-blue-400 { color: #2563eb; }
+
+    /* Light mode - purple (T3) */
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .group:hover .group-hover\:text-purple-400 { color: #7c3aed; }
+
+    /* Light mode - remove gradientes */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">DeepClaudeX</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="curso/trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Conceito</span>
+          </a>
+          <a href="curso/trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Configuracao</span>
+          </a>
+          <a href="curso/trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Projetos</span>
+          </a>
+
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="bg-gradient-to-br from-dark-800 via-dark-900 to-dark-800 py-20 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-4 border border-primary/40">
+        CURSO PRATICO
+      </span>
+      <h1 class="text-4xl sm:text-5xl font-bold mb-6 leading-tight">
+        Multi-Modelo <span class="text-primary">70/20/10</span><br>
+        Como orquestrar 3 IAs sem desperdicar dinheiro
+      </h1>
+      <p class="text-lg text-neutral-300 max-w-3xl mb-8">
+        GPT-5.5 planeja. Opus 4.7 refina. DeepSeek V4 executa. Voce paga 1/5 do custo e entrega o dobro de codigo. Este curso ensina a configuracao exata, com exemplos de projetos reais.
+      </p>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mb-8">
+        <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+          <div class="text-2xl font-bold text-primary">3</div>
+          <div class="text-xs text-neutral-400">Trilhas</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+          <div class="text-2xl font-bold text-primary">18</div>
+          <div class="text-xs text-neutral-400">Modulos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+          <div class="text-2xl font-bold text-primary">108</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600">
+          <div class="text-2xl font-bold text-primary">~10h</div>
+          <div class="text-xs text-neutral-400">Duracao</div>
+        </div>
+      </div>
+
+      <div class="flex justify-start space-x-3">
+        <a href="curso/trilha1/index.html" class="px-6 py-3 bg-primary text-dark-900 rounded-lg font-semibold hover:bg-yellow-300 transition-colors">
+          Comecar pela Trilha 1 →
+        </a>
+        <a href="#trilhas" class="px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+          Ver as 3 trilhas
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEUDO -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+    <!-- A regra de ouro -->
+    <section class="mb-16">
+      <div class="bg-gradient-to-br from-primary/10 to-dark-800 rounded-xl border border-primary/40 p-8">
+        <h2 class="text-2xl font-bold mb-4 flex items-center">
+          <span class="mr-3">🎯</span> A regra de ouro
+        </h2>
+        <p class="text-lg text-neutral-300 mb-6">
+          <strong class="text-primary">GPT-5.5 e Opus 4.7 sao os arquitetos e revisores. DeepSeek V4 e o executor barato.</strong>
+        </p>
+        <p class="text-neutral-300 mb-6">
+          O erro mais comum e deixar o modelo barato decidir tudo sozinho — o resultado e codigo medio com bugs sutis. O erro oposto e usar Opus para tudo — voce queima credito em tarefas que nao exigem inteligencia de ponta. A combinacao certa equilibra qualidade, velocidade e custo.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 items-center">
+          <!-- Donut Chart SVG -->
+          <div class="lg:col-span-2 flex justify-center">
+            <svg viewBox="0 0 200 200" class="w-56 h-56" xmlns="http://www.w3.org/2000/svg">
+              <!-- Fundo -->
+              <circle cx="100" cy="100" r="80" fill="none" stroke="#374151" stroke-width="32"/>
+              <!-- 70% emerald (DeepSeek) - 0 a 252deg -->
+              <circle cx="100" cy="100" r="80" fill="none" stroke="#10b981" stroke-width="32"
+                stroke-dasharray="351.86 502.65" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+              <!-- 20% blue (GPT-5.5) - 252 a 324deg -->
+              <circle cx="100" cy="100" r="80" fill="none" stroke="#3b82f6" stroke-width="32"
+                stroke-dasharray="100.53 502.65" stroke-dashoffset="-351.86" transform="rotate(-90 100 100)"/>
+              <!-- 10% purple (Opus) - 324 a 360deg -->
+              <circle cx="100" cy="100" r="80" fill="none" stroke="#a855f7" stroke-width="32"
+                stroke-dasharray="50.27 502.65" stroke-dashoffset="-452.39" transform="rotate(-90 100 100)"/>
+              <!-- Centro -->
+              <text x="100" y="95" text-anchor="middle" fill="currentColor" class="text-neutral-100" font-size="22" font-weight="700">70/20/10</text>
+              <text x="100" y="115" text-anchor="middle" fill="currentColor" class="text-neutral-400" font-size="10">A proporcao</text>
+            </svg>
+          </div>
+
+          <!-- Cards lado a lado -->
+          <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-dark-800/50 rounded-lg p-4 border border-emerald-500/30">
+              <div class="flex items-center justify-between mb-1">
+                <div class="text-3xl font-bold text-emerald-400">70%</div>
+                <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div class="font-semibold mb-1">DeepSeek V4</div>
+              <div class="text-sm text-neutral-400">Executor: codifica, refatora, testa, documenta</div>
+            </div>
+            <div class="bg-dark-800/50 rounded-lg p-4 border border-blue-500/30">
+              <div class="flex items-center justify-between mb-1">
+                <div class="text-3xl font-bold text-blue-400">20%</div>
+                <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+              </div>
+              <div class="font-semibold mb-1">GPT-5.5</div>
+              <div class="text-sm text-neutral-400">Arquiteto: planeja, revisa, debuga dificil</div>
+            </div>
+            <div class="bg-dark-800/50 rounded-lg p-4 border border-purple-500/30">
+              <div class="flex items-center justify-between mb-1">
+                <div class="text-3xl font-bold text-purple-400">10%</div>
+                <svg class="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+              </div>
+              <div class="font-semibold mb-1">Opus 4.7</div>
+              <div class="text-sm text-neutral-400">Designer: UX, criatividade, decisao final</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pipeline Visual -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6">O fluxo na pratica</h2>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 sm:p-8 overflow-x-auto">
+        <svg viewBox="0 0 900 220" class="w-full min-w-[700px]" xmlns="http://www.w3.org/2000/svg">
+          <!-- Etapa 1: Planeja (GPT-5.5) -->
+          <g>
+            <rect x="20" y="60" width="180" height="100" rx="12" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+            <text x="110" y="90" text-anchor="middle" fill="#60a5fa" font-size="11" font-weight="700">1. PLANEJA</text>
+            <text x="110" y="115" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">GPT-5.5</text>
+            <text x="110" y="135" text-anchor="middle" fill="#cbd5e1" font-size="10">Arquitetura</text>
+            <text x="110" y="148" text-anchor="middle" fill="#cbd5e1" font-size="10">Tarefas + criterios</text>
+          </g>
+
+          <!-- Seta 1->2 -->
+          <path d="M 200 110 L 240 110" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Etapa 2: Refina (Opus) -->
+          <g>
+            <rect x="240" y="60" width="180" height="100" rx="12" fill="#581c87" stroke="#a855f7" stroke-width="2"/>
+            <text x="330" y="90" text-anchor="middle" fill="#c084fc" font-size="11" font-weight="700">2. REFINA</text>
+            <text x="330" y="115" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Opus 4.7</text>
+            <text x="330" y="135" text-anchor="middle" fill="#cbd5e1" font-size="10">UI/UX, copy</text>
+            <text x="330" y="148" text-anchor="middle" fill="#cbd5e1" font-size="10">Decisoes de produto</text>
+          </g>
+
+          <!-- Seta 2->3 -->
+          <path d="M 420 110 L 460 110" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Etapa 3: Executa (DeepSeek) -->
+          <g>
+            <rect x="460" y="60" width="180" height="100" rx="12" fill="#064e3b" stroke="#10b981" stroke-width="2"/>
+            <text x="550" y="90" text-anchor="middle" fill="#34d399" font-size="11" font-weight="700">3. EXECUTA</text>
+            <text x="550" y="115" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">DeepSeek V4</text>
+            <text x="550" y="135" text-anchor="middle" fill="#cbd5e1" font-size="10">Codigo, testes</text>
+            <text x="550" y="148" text-anchor="middle" fill="#cbd5e1" font-size="10">Refatoracao, docs</text>
+          </g>
+
+          <!-- Seta 3->4 -->
+          <path d="M 640 110 L 680 110" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Etapa 4: Revisa -->
+          <g>
+            <rect x="680" y="60" width="200" height="100" rx="12" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+            <text x="780" y="90" text-anchor="middle" fill="#60a5fa" font-size="11" font-weight="700">4. REVISA</text>
+            <text x="780" y="115" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">GPT-5.5 / Opus</text>
+            <text x="780" y="135" text-anchor="middle" fill="#cbd5e1" font-size="10">Bugs, seguranca</text>
+            <text x="780" y="148" text-anchor="middle" fill="#cbd5e1" font-size="10">Aprova ou volta p/ 3</text>
+          </g>
+
+          <!-- Loop de volta -->
+          <path d="M 780 60 Q 780 20 550 20 Q 320 20 550 50" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="4 4" fill="none" marker-end="url(#arrow)"/>
+          <text x="550" y="14" text-anchor="middle" fill="#9ca3af" font-size="10" font-style="italic">se houver correcoes</text>
+
+          <!-- Definicao da seta -->
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af"/>
+            </marker>
+          </defs>
+
+          <!-- Labels de baixo -->
+          <text x="110" y="195" text-anchor="middle" fill="#6b7280" font-size="11">~10% do tempo</text>
+          <text x="330" y="195" text-anchor="middle" fill="#6b7280" font-size="11">~5% do tempo</text>
+          <text x="550" y="195" text-anchor="middle" fill="#6b7280" font-size="11">~70% do tempo</text>
+          <text x="780" y="195" text-anchor="middle" fill="#6b7280" font-size="11">~15% do tempo</text>
+        </svg>
+        <p class="text-sm text-neutral-400 mt-4">
+          A maior parte do trabalho (codigo bruto) sai do executor barato. Os modelos caros entram nas pontas: planejar antes e revisar depois. <strong class="text-primary">E como ter um senior fazendo design e code review enquanto um exercito de juniors digita.</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- TRILHAS -->
+    <section id="trilhas" class="mb-16">
+      <h2 class="text-3xl font-bold mb-2">As 3 trilhas</h2>
+      <p class="text-neutral-400 mb-8">Conceito → Configuracao → Projetos. Cada trilha tem 6 modulos com 6 topicos cada.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- T1 Conceito -->
+        <a href="curso/trilha1/index.html" class="group bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-emerald-500/30 transition-colors">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded">TRILHA 1</span>
+            <span class="text-xs text-neutral-500">~3h</span>
+          </div>
+          <h3 class="text-2xl font-bold mb-3 group-hover:text-emerald-400 transition-colors">🤔 Conceito</h3>
+          <p class="text-sm text-neutral-400 mb-4">
+            Por que combinar modelos. Quem e cada um, quando usar e a logica do 70/20/10.
+          </p>
+          <ul class="space-y-1 text-sm text-neutral-300 mb-4">
+            <li>• Os 3 perfis (arquiteto, designer, executor)</li>
+            <li>• Custo, velocidade e qualidade</li>
+            <li>• Mitos e armadilhas</li>
+          </ul>
+          <span class="text-emerald-400 text-sm font-semibold">6 modulos · 36 topicos →</span>
+        </a>
+
+        <!-- T2 Configuracao -->
+        <a href="curso/trilha2/index.html" class="group bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/30 transition-colors">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded">TRILHA 2</span>
+            <span class="text-xs text-neutral-500">~3h</span>
+          </div>
+          <h3 class="text-2xl font-bold mb-3 group-hover:text-blue-400 transition-colors">🛠️ Configuracao</h3>
+          <p class="text-sm text-neutral-400 mb-4">
+            Setup do ambiente, roteamento de tarefas, prompts especificos e workflow de revisao cruzada.
+          </p>
+          <ul class="space-y-1 text-sm text-neutral-300 mb-4">
+            <li>• Claude Code, Cursor e OpenRouter</li>
+            <li>• Templates de prompt por papel</li>
+            <li>• Metricas e otimizacao</li>
+          </ul>
+          <span class="text-blue-400 text-sm font-semibold">6 modulos · 36 topicos →</span>
+        </a>
+
+        <!-- T3 Projetos -->
+        <a href="curso/trilha3/index.html" class="group bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-purple-500/30 transition-colors">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded">TRILHA 3</span>
+            <span class="text-xs text-neutral-500">~4h</span>
+          </div>
+          <h3 class="text-2xl font-bold mb-3 group-hover:text-purple-400 transition-colors">🚀 Projetos</h3>
+          <p class="text-sm text-neutral-400 mb-4">
+            Aplicacao em projetos reais: landing, refatoracao, full-stack, automacao, API e estudo de caso.
+          </p>
+          <ul class="space-y-1 text-sm text-neutral-300 mb-4">
+            <li>• Casos passo a passo com prompts</li>
+            <li>• Comparativo entre abordagens</li>
+            <li>• Custo real por projeto</li>
+          </ul>
+          <span class="text-purple-400 text-sm font-semibold">6 modulos · 36 topicos →</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Para quem e -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6">Para quem e este curso</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Voce vai tirar proveito se</h4>
+          <ul class="space-y-2 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Ja usa um modelo de IA para programar mas acha caro ou lento</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Quer reduzir gasto sem sacrificar qualidade</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>E dev solo, freelancer ou tech lead pequeno</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Quer aprender a "delegar" entre modelos como faria com um time</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Pule este curso se</h4>
+          <ul class="space-y-2 text-neutral-300">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Voce ainda nao programou nada com IA — comece pelo basico antes</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sua empresa exige um unico fornecedor (compliance)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Voce so quer "o melhor modelo" e nao se importa com custo</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Procura tutorial de prompt engineering puro</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section>
+      <div class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-purple-900/30 rounded-xl border border-dark-600 p-8 text-center">
+        <h2 class="text-2xl font-bold mb-4">Pronto para comecar?</h2>
+        <p class="text-neutral-300 mb-6 max-w-2xl mx-auto">
+          A trilha 1 te da a base conceitual em 3h. Depois e so seguir para a configuracao e botar em projetos reais.
+        </p>
+        <div class="flex justify-start space-x-3 justify-center">
+          <a href="curso/trilha1/index.html" class="px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">
+            Trilha 1 — Conceito
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>DeepClaudeX · Multi-Modelo 70/20/10 · INEMA.CLUB · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light') {
+      html.classList.remove('dark');
+      themeToggleDarkIcon.classList.remove('hidden');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>
