@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modulo 1.3 - A regra dos 70/20/10 | DeepClaudeX</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Inter',sans-serif}.dark body{background-color:#111827}
+html:not(.dark) body{background-color:#f8fafc}
+html:not(.dark) .bg-dark-900{background-color:#fff}html:not(.dark) .bg-dark-800{background-color:#f9fafb}html:not(.dark) .bg-dark-700{background-color:#f3f4f6}html:not(.dark) .bg-dark-600{background-color:#e5e7eb}
+html:not(.dark) .text-neutral-100{color:#111827}html:not(.dark) .text-neutral-300{color:#4b5563}html:not(.dark) .text-neutral-400{color:#6b7280}html:not(.dark) .text-neutral-500{color:#9ca3af}
+html:not(.dark) .border-dark-600{border-color:#d1d5db}html:not(.dark) .border-dark-700{border-color:#e5e7eb}
+html:not(.dark) .text-emerald-400{color:#059669}html:not(.dark) .bg-emerald-500\/20{background-color:rgba(5,150,105,.12)}html:not(.dark) .bg-emerald-500\/10{background-color:rgba(5,150,105,.08)}html:not(.dark) .border-emerald-500\/30{border-color:rgba(5,150,105,.25)}html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08)}html:not(.dark) .hover\:text-emerald-400:hover{color:#059669}
+html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb}html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08)}
+html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed}html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08)}
+html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important}
+html:not(.dark) .text-primary{color:#a16207}html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08)}html:not(.dark) .border-primary\/40{border-color:rgba(161,98,7,.25)}
+html:not(.dark) .text-sky-400{color:#0369a1}html:not(.dark) .text-yellow-400{color:#a16207}html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7}html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e}
+html:not(.dark) .text-blue-400{color:#2563eb}html:not(.dark) .bg-blue-900\/20{background-color:rgba(37,99,235,.06)}html:not(.dark) .border-blue-500\/30{border-color:rgba(37,99,235,.25)}
+html:not(.dark) .text-red-400{color:#dc2626}html:not(.dark) .bg-red-900\/20{background-color:rgba(220,38,38,.06)}html:not(.dark) .border-red-500\/30{border-color:rgba(220,38,38,.25)}
+html:not(.dark) .text-purple-400{color:#7c3aed}
+html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95)}
+</style></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">DeepClaudeX</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Conceito</span></a>
+<a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Configuracao</span></a>
+<a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Projetos</span></a>
+<button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"/></svg></button></div></div></div></nav>
+
+<nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4"><div class="flex items-center space-x-2 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-emerald-400">Inicio</a><span>/</span><a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span><span class="text-emerald-400">Modulo 1.3</span></div></nav>
+
+<header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MODULO 1.3</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">⚖️ A regra dos 70/20/10</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">Por que essa proporcao especifica funciona — e quando ajustar para 60/30/10 ou 80/15/5. A matematica por tras da divisao otima.</p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Topicos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">30</div><div class="text-xs text-neutral-400">Minutos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Basico</div><div class="text-xs text-neutral-400">Nivel</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Teoria</div><div class="text-xs text-neutral-400">Tipo</div></div>
+</div></div></header>
+
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+<section id="t1" class="mb-16">
+<div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span><h2 class="text-2xl font-bold">📐 Por que 70/20/10 e nao 50/30/20</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">A proporcao espelha a distribuicao real de tarefas em projetos. Forcar outra divisao desperdica modelos caros em tarefas que nao pedem.</p>
+
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">📊</span> A distribuicao real do trabalho</h3>
+<ul class="space-y-2 text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>~70%</strong> implementacao mecanica (componentes, testes, refactor)</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>~20%</strong> raciocinio nao-trivial (arquitetura, debug, decisoes)</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>~10%</strong> criatividade e julgamento (UX, copy, polimento)</span></li>
+</ul></div>
+</section>
+
+<section id="t2" class="mb-16">
+<div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span><h2 class="text-2xl font-bold">⏱️ Como medir esses percentuais na pratica</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">A regra se aplica em <strong class="text-emerald-400">tokens de saida</strong>, nao em numero de chamadas. DeepSeek consome muito mais token gerando codigo do que GPT consome planejando.</p>
+
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">🧮</span> Exemplo numerico</h3>
+<p class="text-neutral-300 mb-3">Em 1 feature media:</p>
+<ul class="space-y-1 text-neutral-300 text-sm">
+<li>• GPT-5.5 plano: 5 chamadas, 8k tokens</li>
+<li>• Opus polimento: 2 chamadas, 4k tokens</li>
+<li>• DeepSeek codigo: 30 chamadas, 60k tokens</li>
+</ul>
+<p class="text-neutral-300 mt-3"><strong class="text-blue-400">Em chamadas:</strong> 81% / 14% / 5%. <strong class="text-blue-400">Em tokens:</strong> 83% / 11% / 6%. Proximo de 80/15/5 — perfeitamente saudavel para uma feature.</p>
+</div>
+</section>
+
+<section id="t3" class="mb-16">
+<div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span><h2 class="text-2xl font-bold">💰 Calculo de custo: exemplo real</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Projeto de 1M tokens de saida. Numeros lado a lado.</p>
+
+<div class="overflow-x-auto mb-6">
+<table class="w-full text-sm">
+<thead><tr class="bg-dark-700 text-emerald-400"><th class="p-3 text-left">Setup</th><th class="p-3 text-right">Custo</th><th class="p-3 text-left">Calculo</th></tr></thead>
+<tbody class="bg-dark-800">
+<tr class="border-b border-dark-600"><td class="p-3">Single-Opus</td><td class="p-3 text-right text-red-400 font-bold">$75.00</td><td class="p-3 text-neutral-400 text-xs">1M × $75/M</td></tr>
+<tr class="border-b border-dark-600"><td class="p-3">Single-GPT 5.5</td><td class="p-3 text-right text-neutral-300">$30.00</td><td class="p-3 text-neutral-400 text-xs">1M × $30/M</td></tr>
+<tr class="border-b border-dark-600"><td class="p-3">Single-DeepSeek</td><td class="p-3 text-right text-neutral-300">$1.20</td><td class="p-3 text-neutral-400 text-xs">1M × $1.20/M (sem revisao = bugs)</td></tr>
+<tr class="bg-emerald-900/20"><td class="p-3 font-bold text-emerald-400">70/20/10</td><td class="p-3 text-right text-emerald-400 font-bold">$10.84</td><td class="p-3 text-neutral-400 text-xs">0.7M × $1.20 + 0.2M × $30 + 0.1M × $75</td></tr>
+</tbody></table></div>
+
+<div class="bg-primary/10 rounded-xl border border-primary/40 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> A licao</h3>
+<p class="text-neutral-300">70/20/10 entrega <strong class="text-primary">~7x mais barato</strong> que single-Opus, com qualidade equivalente. E <strong class="text-primary">~9x mais qualidade</strong> que single-DeepSeek puro (que vem com bugs).</p>
+</div>
+</section>
+
+<section id="t4" class="mb-16">
+<div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span><h2 class="text-2xl font-bold">🔧 Quando ajustar para 60/30/10 ou 80/15/5</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">A regra nao e dogma. Calibre para o risco e a natureza do projeto.</p>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5">
+<h4 class="font-bold text-blue-400 mb-2">50/40/10</h4>
+<p class="text-xs text-neutral-400 mb-2">Sistemas criticos</p>
+<p class="text-sm text-neutral-300">Banco, saude, infra. Mais GPT-5.5 para reduzir risco. Custo mais alto, mas justificado.</p>
+</div>
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5">
+<h4 class="font-bold text-emerald-400 mb-2">70/20/10</h4>
+<p class="text-xs text-neutral-400 mb-2">Padrao</p>
+<p class="text-sm text-neutral-300">SaaS consumer, app medio, MVP. Sweet spot entre custo, velocidade e qualidade.</p>
+</div>
+<div class="bg-purple-900/20 rounded-xl border border-purple-500/30 p-5">
+<h4 class="font-bold text-purple-400 mb-2">85/10/5</h4>
+<p class="text-xs text-neutral-400 mb-2">Volume</p>
+<p class="text-sm text-neutral-300">Geracao de docs, posts, traducao, scripts. Risco baixo, volume alto. DeepSeek domina.</p>
+</div>
+</div>
+</section>
+
+<section id="t5" class="mb-16">
+<div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span><h2 class="text-2xl font-bold">🚨 Sinais de que voce esta usando errado</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Diagnosticar pela "dor" te leva ao ajuste certo. Cada sintoma aponta para um vertice.</p>
+
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-red-400 mb-4 flex items-center"><span class="mr-2">⚠️</span> Sinais e ajustes</h3>
+<div class="space-y-3 text-neutral-300">
+<div><strong class="text-red-400">Bugs em codigo gerado</strong> → falta revisao. Adicionar pass com GPT-5.5 sobre o diff.</div>
+<div><strong class="text-red-400">Plano confuso, modulos retrabalhados</strong> → pulou o arquiteto. Sempre comecar com GPT-5.5.</div>
+<div><strong class="text-red-400">Fatura alta</strong> → abusou dos caros. Conferir % de tokens e mover para DeepSeek.</div>
+<div><strong class="text-red-400">UX sem sensibilidade, copy generico</strong> → faltou Opus. Adicionar pass de polimento.</div>
+<div><strong class="text-red-400">Modelos travando em loop</strong> → contexto sujo. /clear e recomecar.</div>
+</div></div>
+</section>
+
+<section id="t6" class="mb-16">
+<div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span><h2 class="text-2xl font-bold">📈 Evolucao: comecar conservador, ir migrando</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Pular direto para 70/20/10 sem treino faz voce ter sustos com bugs e voltar para single-model. Adocao em fases mantem confianca.</p>
+
+<div class="space-y-4 mb-6">
+<div class="bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-bold mb-2 text-blue-400">Semana 1-2: 50/30/20</h4><p class="text-sm text-neutral-300">Comece dependendo mais de Opus. Use DeepSeek so em tarefas ja conhecidas. Ganhe confianca observando que funciona.</p></div>
+<div class="bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-bold mb-2 text-blue-400">Semana 3-4: 60/25/15</h4><p class="text-sm text-neutral-300">Migre testes e refatoracoes para DeepSeek. Mantenha plano sempre em GPT-5.5. Comece a sentir a economia.</p></div>
+<div class="bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-bold mb-2 text-emerald-400">Mes 2+: 70/20/10 ✓</h4><p class="text-sm text-neutral-300">Voce ja sabe quando subir para modelo caro e quando ficar no DeepSeek. A intuicao e automatica.</p></div>
+</div>
+</section>
+
+<section class="mb-12"><div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Modulo</h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Distribuicao real:</strong> <span class="text-neutral-400">70% mecanico, 20% raciocinio, 10% criatividade</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Medir em tokens:</strong> <span class="text-neutral-400">nao confundir com numero de chamadas</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Custo 7x menor:</strong> <span class="text-neutral-400">vs single-Opus, com qualidade equivalente</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Calibrar por contexto:</strong> <span class="text-neutral-400">50/40/10 critico, 70/20/10 padrao, 85/10/5 volume</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Sintomas guiam ajuste:</strong> <span class="text-neutral-400">cada dor aponta para um vertice especifico</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Adocao em fases:</strong> <span class="text-neutral-400">50/30/20 → 60/25/15 → 70/20/10 em 4-6 semanas</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8"><h3 class="font-semibold text-emerald-400 mb-2">Proximo Modulo:</h3><p class="text-neutral-300">1.4 — 🎯 Quando usar cada modelo</p></div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a href="modulo-1-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Modulo 1.2</a>
+<a href="modulo-1-4.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Proximo Modulo →</a>
+</div></div></section>
+
+</main>
+
+<footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>DeepClaudeX · Modulo 1.3 · INEMA.CLUB · 2026</p></div></footer>
+
+<script>
+const t=document.getElementById('theme-toggle'),d=document.getElementById('theme-toggle-dark-icon'),l=document.getElementById('theme-toggle-light-icon'),h=document.documentElement;
+if(localStorage.getItem('theme')==='light'){h.classList.remove('dark');d.classList.remove('hidden')}else{l.classList.remove('hidden')}
+t.addEventListener('click',()=>{d.classList.toggle('hidden');l.classList.toggle('hidden');h.classList.toggle('dark');localStorage.setItem('theme',h.classList.contains('dark')?'dark':'light')});
+</script>
+</body></html>

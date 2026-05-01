@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modulo 1.5 - Custo, velocidade e qualidade | DeepClaudeX</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',sans-serif}.dark body{background-color:#111827}html:not(.dark) body{background-color:#f8fafc}html:not(.dark) .bg-dark-900{background-color:#fff}html:not(.dark) .bg-dark-800{background-color:#f9fafb}html:not(.dark) .bg-dark-700{background-color:#f3f4f6}html:not(.dark) .bg-dark-600{background-color:#e5e7eb}html:not(.dark) .text-neutral-100{color:#111827}html:not(.dark) .text-neutral-300{color:#4b5563}html:not(.dark) .text-neutral-400{color:#6b7280}html:not(.dark) .text-neutral-500{color:#9ca3af}html:not(.dark) .border-dark-600{border-color:#d1d5db}html:not(.dark) .border-dark-700{border-color:#e5e7eb}html:not(.dark) .text-emerald-400{color:#059669}html:not(.dark) .bg-emerald-500\/20{background-color:rgba(5,150,105,.12)}html:not(.dark) .bg-emerald-500\/10{background-color:rgba(5,150,105,.08)}html:not(.dark) .border-emerald-500\/30{border-color:rgba(5,150,105,.25)}html:not(.dark) .hover\:text-emerald-400:hover{color:#059669}html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08)}html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb}html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08)}html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed}html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08)}html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important}html:not(.dark) .text-primary{color:#a16207}html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08)}html:not(.dark) .border-primary\/40{border-color:rgba(161,98,7,.25)}html:not(.dark) .text-sky-400{color:#0369a1}html:not(.dark) .text-yellow-400{color:#a16207}html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7}html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e}html:not(.dark) .text-blue-400{color:#2563eb}html:not(.dark) .bg-blue-900\/20{background-color:rgba(37,99,235,.06)}html:not(.dark) .border-blue-500\/30{border-color:rgba(37,99,235,.25)}html:not(.dark) .text-red-400{color:#dc2626}html:not(.dark) .bg-red-900\/20{background-color:rgba(220,38,38,.06)}html:not(.dark) .border-red-500\/30{border-color:rgba(220,38,38,.25)}html:not(.dark) .text-purple-400{color:#7c3aed}html:not(.dark) .bg-purple-900\/20{background-color:rgba(124,58,237,.06)}html:not(.dark) .border-purple-500\/30{border-color:rgba(124,58,237,.25)}html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95)}</style></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4"><a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">DeepClaudeX</span></a><span class="text-neutral-600">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a></div>
+<div class="flex items-center space-x-1 sm:space-x-2"><a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Conceito</span></a><a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Configuracao</span></a><a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Projetos</span></a><button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2"><svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg><svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"/></svg></button></div></div></div></nav>
+
+<nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4"><div class="flex items-center space-x-2 text-sm text-neutral-400"><a href="../../index.html" class="hover:text-emerald-400">Inicio</a><span>/</span><a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span><span class="text-emerald-400">Modulo 1.5</span></div></nav>
+
+<header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MODULO 1.5</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">💰 Custo, velocidade e qualidade</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">Os numeros por tras de cada modelo. Tabela de precos, latencia, benchmarks e otimizacoes que cortam fatura pela metade.</p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Topicos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">30</div><div class="text-xs text-neutral-400">Minutos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Basico</div><div class="text-xs text-neutral-400">Nivel</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Numeros</div><div class="text-xs text-neutral-400">Tipo</div></div>
+</div></div></header>
+
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+<section id="t1" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span><h2 class="text-2xl font-bold">💵 Tabela de precos atualizada</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Pricing por 1M tokens. Output sempre custa 3-5x mais que input. Cache reduz input em 90% — vital para conversas longas.</p>
+<div class="overflow-x-auto mb-6"><table class="w-full text-sm"><thead><tr class="bg-dark-700 text-emerald-400"><th class="p-3 text-left">Modelo</th><th class="p-3 text-right">Input</th><th class="p-3 text-right">Output</th><th class="p-3 text-right">Cache hit</th></tr></thead><tbody class="bg-dark-800">
+<tr class="border-b border-dark-600"><td class="p-3 text-purple-400 font-bold">Opus 4.7</td><td class="p-3 text-right">$15/M</td><td class="p-3 text-right">$75/M</td><td class="p-3 text-right">$1.50/M</td></tr>
+<tr class="border-b border-dark-600"><td class="p-3 text-blue-400 font-bold">GPT-5.5</td><td class="p-3 text-right">$5/M</td><td class="p-3 text-right">$30/M</td><td class="p-3 text-right">$0.50/M</td></tr>
+<tr><td class="p-3 text-emerald-400 font-bold">DeepSeek V4</td><td class="p-3 text-right">$0.27/M</td><td class="p-3 text-right">$1.20/M</td><td class="p-3 text-right">$0.05/M</td></tr>
+</tbody></table></div>
+<div class="bg-primary/10 rounded-xl border border-primary/40 p-6 mb-6"><h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Insight</h3><p class="text-neutral-300">DeepSeek e <strong class="text-primary">~60x mais barato</strong> que Opus em output. Mesmo com 90% cache hit, Opus ainda e mais caro que DeepSeek sem cache.</p></div></section>
+
+<section id="t2" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span><h2 class="text-2xl font-bold">⚡ Latencia tipica de cada modelo</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Velocidade afeta UX em chat ao vivo e fluxos com humano esperando. Streaming amenizada a sensacao em todos os casos.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5"><h4 class="font-bold text-emerald-400 mb-2">DeepSeek V4</h4><div class="text-3xl font-bold text-emerald-400 mb-2">~80 tok/s</div><p class="text-sm text-neutral-300">TTFT: ~0.5s. Respostas grandes em 5-10s.</p></div>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5"><h4 class="font-bold text-blue-400 mb-2">GPT-5.5</h4><div class="text-3xl font-bold text-blue-400 mb-2">~50 tok/s</div><p class="text-sm text-neutral-300">TTFT: ~1s. Respostas grandes em 10-15s.</p></div>
+<div class="bg-purple-900/20 rounded-xl border border-purple-500/30 p-5"><h4 class="font-bold text-purple-400 mb-2">Opus 4.7</h4><div class="text-3xl font-bold text-purple-400 mb-2">~30 tok/s</div><p class="text-sm text-neutral-300">TTFT: ~1.5s. Respostas grandes em 20-30s.</p></div>
+</div></section>
+
+<section id="t3" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span><h2 class="text-2xl font-bold">🎯 Qualidade media em benchmarks de codigo</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Benchmarks publicos (HumanEval, SWE-bench) mostram gap, mas em fluxo plan→exec→review, DeepSeek + revisao se aproxima do single-Opus em qualidade final.</p>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6"><h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">📊</span> Benchmarks (HumanEval+ pass@1)</h3>
+<div class="space-y-3">
+<div><div class="flex justify-between text-sm mb-1"><span>Opus 4.7</span><span class="text-purple-400 font-bold">88%</span></div><div class="bg-dark-700 h-2 rounded"><div class="bg-purple-400 h-2 rounded" style="width:88%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span>GPT-5.5</span><span class="text-blue-400 font-bold">86%</span></div><div class="bg-dark-700 h-2 rounded"><div class="bg-blue-400 h-2 rounded" style="width:86%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span>DeepSeek V4 (sozinho)</span><span class="text-emerald-400 font-bold">76%</span></div><div class="bg-dark-700 h-2 rounded"><div class="bg-emerald-400 h-2 rounded" style="width:76%"></div></div></div>
+<div><div class="flex justify-between text-sm mb-1"><span>DeepSeek V4 + GPT-5.5 review</span><span class="text-yellow-400 font-bold">87%</span></div><div class="bg-dark-700 h-2 rounded"><div class="bg-yellow-400 h-2 rounded" style="width:87%"></div></div></div>
+</div></div></section>
+
+<section id="t4" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span><h2 class="text-2xl font-bold">📊 O triangulo de tradeoff</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Visualizar ajuda a comunicar a estrategia para times e clientes nao-tecnicos. Cada modelo ocupa uma regiao; combinar te aproxima do centro.</p>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+<div class="grid grid-cols-3 gap-4 text-center">
+<div class="p-4 bg-purple-900/20 rounded-lg border border-purple-500/30"><div class="text-2xl mb-2">🎨</div><h4 class="font-bold text-purple-400 mb-1">Opus</h4><p class="text-xs text-neutral-400">Qualidade alta + velocidade media. Sacrifica custo.</p></div>
+<div class="p-4 bg-blue-900/20 rounded-lg border border-blue-500/30"><div class="text-2xl mb-2">🏛️</div><h4 class="font-bold text-blue-400 mb-1">GPT-5.5</h4><p class="text-xs text-neutral-400">Qualidade alta + custo medio. Sacrifica velocidade max.</p></div>
+<div class="p-4 bg-emerald-900/20 rounded-lg border border-emerald-500/30"><div class="text-2xl mb-2">⚡</div><h4 class="font-bold text-emerald-400 mb-1">DeepSeek</h4><p class="text-xs text-neutral-400">Custo baixo + velocidade alta. Sacrifica qualidade max.</p></div>
+</div></div></section>
+
+<section id="t5" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span><h2 class="text-2xl font-bold">🧮 Calculo: custo por feature em projeto medio</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Formula simples para estimar antes de cotar projeto.</p>
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-4">Formula</h3>
+<div class="bg-dark-900/50 rounded p-4 mb-4 font-mono text-sm text-neutral-300">custo = (linhas × 8 tokens) × ratio_retrabalho × peso_modelo</div>
+<p class="text-neutral-300 mb-3"><strong class="text-emerald-400">Exemplo:</strong> feature de 500 linhas, retrabalho 1.5x, peso medio (70/20/10):</p>
+<ul class="space-y-1 text-neutral-300 text-sm">
+<li>• 500 × 8 × 1.5 = 6000 tokens estimados</li>
+<li>• 70% × $1.20 + 20% × $30 + 10% × $75 = $14.04/M tokens</li>
+<li>• 0.006M × $14.04 = <strong class="text-emerald-400">$0.084 por feature</strong></li>
+</ul>
+</div></section>
+
+<section id="t6" class="mb-16"><div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span><h2 class="text-2xl font-bold">💡 Otimizacoes ocultas</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">3 truques que cortam fatura pela metade. Sao "money on the table" — quem nao usa paga 2x.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5"><h4 class="font-bold text-emerald-400 mb-2">📦 Prompt cache</h4><p class="text-sm text-neutral-300 mb-2">90% off em input repetido. Mande primeiro o contexto grande, depois pergunte.</p><p class="text-xs text-neutral-500">Economia tipica: 60-80% em conversas longas</p></div>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5"><h4 class="font-bold text-blue-400 mb-2">📥 Batch API</h4><p class="text-sm text-neutral-300 mb-2">50% off em saida nao-realtime. Util para geracao de docs em escala.</p><p class="text-xs text-neutral-500">Economia tipica: 50% em jobs em lote</p></div>
+<div class="bg-purple-900/20 rounded-xl border border-purple-500/30 p-5"><h4 class="font-bold text-purple-400 mb-2">🌊 Streaming</h4><p class="text-sm text-neutral-300 mb-2">Sem custo extra, melhora UX percebida (usuario ve resposta sendo gerada).</p><p class="text-xs text-neutral-500">Economia tipica: 0% — mas UX 3x melhor</p></div>
+</div></section>
+
+<section class="mb-12"><div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Modulo</h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">DeepSeek e ~60x mais barato</strong> <span class="text-neutral-400">que Opus em output</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Velocidade:</strong> <span class="text-neutral-400">DeepSeek 80 tok/s, GPT-5.5 50, Opus 30</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">DeepSeek + revisao</strong> <span class="text-neutral-400">se aproxima do Opus em qualidade final</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Triangulo de tradeoff:</strong> <span class="text-neutral-400">cada modelo ocupa um vertice — combinar aproxima do centro</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Formula de custo:</strong> <span class="text-neutral-400">linhas × 8 × retrabalho × peso medio</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">3 otimizacoes cortam 50%:</strong> <span class="text-neutral-400">cache, batch, streaming</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8"><h3 class="font-semibold text-emerald-400 mb-2">Proximo Modulo:</h3><p class="text-neutral-300">1.6 — ⚠️ Mitos e armadilhas</p></div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a href="modulo-1-4.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Modulo 1.4</a>
+<a href="modulo-1-6.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Proximo Modulo →</a>
+</div></div></section>
+
+</main>
+<footer class="border-t border-dark-600 py-8 mt-16"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>DeepClaudeX · Modulo 1.5 · INEMA.CLUB · 2026</p></div></footer>
+<script>const t=document.getElementById('theme-toggle'),d=document.getElementById('theme-toggle-dark-icon'),l=document.getElementById('theme-toggle-light-icon'),h=document.documentElement;if(localStorage.getItem('theme')==='light'){h.classList.remove('dark');d.classList.remove('hidden')}else{l.classList.remove('hidden')}t.addEventListener('click',()=>{d.classList.toggle('hidden');l.classList.toggle('hidden');h.classList.toggle('dark');localStorage.setItem('theme',h.classList.contains('dark')?'dark':'light')});</script>
+</body></html>

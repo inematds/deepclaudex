@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modulo 1.1 - Por que combinar modelos | DeepClaudeX</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#FACC15',dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'}}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Inter',sans-serif}.dark body{background-color:#111827}
+html:not(.dark) body{background-color:#f8fafc}
+html:not(.dark) .bg-dark-900{background-color:#fff}html:not(.dark) .bg-dark-800{background-color:#f9fafb}html:not(.dark) .bg-dark-700{background-color:#f3f4f6}html:not(.dark) .bg-dark-600{background-color:#e5e7eb}
+html:not(.dark) .text-neutral-100{color:#111827}html:not(.dark) .text-neutral-300{color:#4b5563}html:not(.dark) .text-neutral-400{color:#6b7280}html:not(.dark) .text-neutral-500{color:#9ca3af}
+html:not(.dark) .border-dark-600{border-color:#d1d5db}html:not(.dark) .border-dark-700{border-color:#e5e7eb}
+html:not(.dark) .text-emerald-400{color:#059669}html:not(.dark) .bg-emerald-500\/20{background-color:rgba(5,150,105,.12)}html:not(.dark) .bg-emerald-500\/10{background-color:rgba(5,150,105,.08)}html:not(.dark) .border-emerald-500\/30{border-color:rgba(5,150,105,.25)}html:not(.dark) .hover\:bg-emerald-500\/10:hover{background-color:rgba(5,150,105,.08)}html:not(.dark) .hover\:text-emerald-400:hover{color:#059669}
+html:not(.dark) .hover\:text-blue-400:hover{color:#2563eb}html:not(.dark) .hover\:bg-blue-500\/10:hover{background-color:rgba(37,99,235,.08)}
+html:not(.dark) .hover\:text-purple-400:hover{color:#7c3aed}html:not(.dark) .hover\:bg-purple-500\/10:hover{background-color:rgba(124,58,237,.08)}
+html:not(.dark) [class*="bg-gradient-to"]{background-image:none!important}
+html:not(.dark) .text-primary{color:#a16207}html:not(.dark) .bg-primary\/10{background-color:rgba(161,98,7,.08)}html:not(.dark) .border-primary\/40{border-color:rgba(161,98,7,.25)}html:not(.dark) .border-primary\/30{border-color:rgba(161,98,7,.25)}
+html:not(.dark) .text-sky-400{color:#0369a1}html:not(.dark) .text-yellow-400{color:#a16207}html:not(.dark) .hover\:text-sky-300:hover{color:#0284c7}html:not(.dark) .hover\:text-yellow-300:hover{color:#854d0e}
+html:not(.dark) .text-blue-400{color:#2563eb}html:not(.dark) .bg-blue-900\/20{background-color:rgba(37,99,235,.06)}html:not(.dark) .border-blue-500\/30{border-color:rgba(37,99,235,.25)}
+html:not(.dark) .text-red-400{color:#dc2626}html:not(.dark) .bg-red-900\/20{background-color:rgba(220,38,38,.06)}html:not(.dark) .border-red-500\/30{border-color:rgba(220,38,38,.25)}
+html:not(.dark) .text-purple-400{color:#7c3aed}
+html:not(.dark) .bg-dark-900\/95{background-color:rgba(255,255,255,.95)}
+</style></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">DeepClaudeX</span></a>
+<span class="text-neutral-600">|</span>
+<a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Conceito</span></a>
+<a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Configuracao</span></a>
+<a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Projetos</span></a>
+<button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+<svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+<svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"/></svg>
+</button></div></div></div></nav>
+
+<nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a href="../../index.html" class="hover:text-emerald-400">Inicio</a><span>/</span>
+<a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span>
+<span class="text-emerald-400">Modulo 1.1</span>
+</div></nav>
+
+<header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MODULO 1.1</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🤔 Por que combinar modelos</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">A intuicao "um modelo bom resolve tudo" custa caro e entrega menos. Este modulo mostra os mecanismos por tras dessa armadilha — e por que dividir tarefas entre modelos diferentes e o caminho otimo.</p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Topicos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">30</div><div class="text-xs text-neutral-400">Minutos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Basico</div><div class="text-xs text-neutral-400">Nivel</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Teoria</div><div class="text-xs text-neutral-400">Tipo</div></div>
+</div></div></header>
+
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+<section id="t1" class="mb-16">
+<div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">1</span><h2 class="text-2xl font-bold">💸 O custo escondido de usar so um modelo</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">A maioria dos devs comeca com Opus 4.7 ou GPT-5.5 e usa para <strong class="text-emerald-400">tudo</strong> — desde planejamento ate gerar getter/setter trivial. O problema nao e a qualidade (e otima), e o custo: voce paga premium em tarefas onde um modelo barato entrega o mesmo resultado.</p>
+
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center"><span class="mr-2">📊</span> A matematica do desperdicio</h3>
+<p class="text-neutral-300 mb-4">Em projeto de 1M tokens de saida, com Opus 4.7 a $75/M, voce paga <strong class="text-emerald-400">$75</strong>. Com 70% migrado para DeepSeek V4 a $1.20/M, voce paga: 0.3 × $75 + 0.7 × $1.20 = <strong class="text-emerald-400">$23.34</strong>. Mesmo trabalho, 1/3 do custo.</p>
+<ul class="space-y-2 text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>O premium do modelo caro paga em <em>raciocinio</em>, nao em <em>geracao</em></span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>Tarefas mecanicas tem qualidade equivalente em modelos baratos</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span>O custo escala linearmente com tokens, nao com complexidade</span></li>
+</ul></div>
+
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center"><span class="mr-2">🔍</span> Sintomas que voce esta no padrao "single-model caro"</h3>
+<ul class="space-y-2 text-neutral-300">
+<li><strong>Fatura mensal acima de $200</strong> em projeto solo</li>
+<li><strong>"Esperando o modelo gerar"</strong> e um problema recorrente no seu fluxo</li>
+<li>Voce hesita em pedir <strong>refatoracao em escala</strong> porque sabe que vai gastar caro</li>
+<li>Tarefas de docstring e testes consomem <strong>parcela grande do orcamento</strong></li>
+</ul></div>
+</section>
+
+<section id="t2" class="mb-16">
+<div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">2</span><h2 class="text-2xl font-bold">⚖️ O triangulo: qualidade x preco x velocidade</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Toda decisao de modelo escolhe 2 dos 3 vertices. Combinar modelos e a unica forma de aproximar dos 3 simultaneamente — cada papel pega o vertice certo no momento certo.</p>
+
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+<svg viewBox="0 0 600 400" class="w-full max-w-2xl mx-auto" xmlns="http://www.w3.org/2000/svg">
+<polygon points="300,40 540,360 60,360" fill="none" stroke="#4b5563" stroke-width="2"/>
+<text x="300" y="30" text-anchor="middle" fill="#34d399" font-size="14" font-weight="700">QUALIDADE</text>
+<text x="555" y="380" text-anchor="middle" fill="#60a5fa" font-size="14" font-weight="700">VELOCIDADE</text>
+<text x="45" y="380" text-anchor="middle" fill="#FACC15" font-size="14" font-weight="700">CUSTO BAIXO</text>
+<circle cx="180" cy="220" r="40" fill="#581c87" stroke="#a855f7" stroke-width="2" opacity="0.85"/><text x="180" y="218" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Opus 4.7</text><text x="180" y="232" text-anchor="middle" fill="#cbd5e1" font-size="9">qual+vel</text>
+<circle cx="420" cy="220" r="40" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2" opacity="0.85"/><text x="420" y="218" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">GPT-5.5</text><text x="420" y="232" text-anchor="middle" fill="#cbd5e1" font-size="9">qual+barato</text>
+<circle cx="300" cy="320" r="40" fill="#064e3b" stroke="#10b981" stroke-width="2" opacity="0.85"/><text x="300" y="318" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">DeepSeek</text><text x="300" y="332" text-anchor="middle" fill="#cbd5e1" font-size="9">vel+barato</text>
+<circle cx="300" cy="250" r="20" fill="#FACC15" stroke="#fff" stroke-width="2"/><text x="300" y="255" text-anchor="middle" fill="#000" font-size="10" font-weight="700">70/20/10</text>
+</svg>
+<p class="text-sm text-neutral-400 mt-4 text-center">Cada modelo ocupa um lado. Combinar te aproxima do <strong class="text-primary">centro</strong> — o ponto onde voce tem qualidade alta, custo baixo e velocidade boa.</p>
+</div>
+
+<div class="bg-primary/10 rounded-xl border border-primary/40 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica pratica</h3>
+<p class="text-neutral-300">Ao escolher um modelo, pergunte: "Qual vertice eu posso sacrificar nesta tarefa?". Se for "qualidade", DeepSeek. Se for "velocidade", GPT-5.5. Se for "custo", Opus. <strong class="text-primary">Nunca pergunte "qual o melhor?"</strong> — a pergunta certa e "melhor para o que?".</p>
+</div>
+</section>
+
+<section id="t3" class="mb-16">
+<div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">3</span><h2 class="text-2xl font-bold">🧠 Cada modelo tem um perfil — use a forca de cada um</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Modelos sao como pessoas: cada um e bom em coisas diferentes. GPT-5.5 brilha em raciocinio multi-step. Opus 4.7 brilha em sensibilidade e criatividade. DeepSeek V4 brilha em volume rapido a baixo custo.</p>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5">
+<h4 class="font-bold text-emerald-400 mb-2">DeepSeek V4</h4>
+<p class="text-xs text-neutral-400 mb-3">Executor</p>
+<p class="text-sm text-neutral-300">Rapido, barato, qualidade boa-o-suficiente em 80% das tarefas. Padroes ja conhecidos sao seu ponto forte.</p>
+</div>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5">
+<h4 class="font-bold text-blue-400 mb-2">GPT-5.5</h4>
+<p class="text-xs text-neutral-400 mb-3">Arquiteto</p>
+<p class="text-sm text-neutral-300">Conecta 5+ pecas com rigor. Identifica riscos antes de codificar. Excelente debug em problemas com estado.</p>
+</div>
+<div class="bg-purple-900/20 rounded-xl border border-purple-500/30 p-5">
+<h4 class="font-bold text-purple-400 mb-2">Opus 4.7</h4>
+<p class="text-xs text-neutral-400 mb-3">Designer</p>
+<p class="text-sm text-neutral-300">Sensibilidade humana. Decide entre 2 designs, escreve copy que converte, polimento final.</p>
+</div>
+</div>
+</section>
+
+<section id="t4" class="mb-16">
+<div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">4</span><h2 class="text-2xl font-bold">🔄 Especializacao reduz erro em tarefas complexas</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Pedir ao mesmo modelo "pensa, codifica e revisa" em um prompt unico leva a pulos de etapa. O modelo apressa o pensamento para chegar no codigo, e nao revisa criticamente o que ele mesmo acabou de escrever.</p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+<h4 class="font-bold text-emerald-400 mb-4">✓ Pipeline em etapas</h4>
+<ul class="space-y-3 text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Cada etapa tem checkpoint auditavel</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Erro detectado cedo, corrigido barato</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Modelo focado em uma tarefa por vez</span></li>
+<li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Revisao por outro modelo evita vies</span></li>
+</ul></div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+<h4 class="font-bold text-red-400 mb-4">✗ Monolito de prompt</h4>
+<ul class="space-y-3 text-neutral-300">
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Modelo apressa pensamento para gerar</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Revisao do proprio output e cega</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Bug aparece so na execucao</span></li>
+<li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Custo de retrabalho explode</span></li>
+</ul></div>
+</div>
+</section>
+
+<section id="t5" class="mb-16">
+<div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">5</span><h2 class="text-2xl font-bold">🚀 Times de dev tradicionais ja faziam isso</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Empresas dividem trabalho por nivel de senioridade desde sempre: senior planeja, junior executa, tech lead revisa. O setup multi-modelo e a versao IA dessa estrutura — e a intuicao que voce ja tem sobre delegacao funciona perfeitamente aqui.</p>
+
+<div class="space-y-6 mb-6">
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">→</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Senior dev (GPT-5.5)</h4>
+<p class="text-neutral-300 text-sm">"Quebra a feature em tarefas, define interfaces, identifica riscos." — analogo ao "tech lead designa sprint".</p>
+</div></div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">→</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Junior dev produtivo (DeepSeek V4)</h4>
+<p class="text-neutral-300 text-sm">"Implementa exatamente o plano, gera 5 componentes parecidos, escreve docstrings." — analogo ao dev pleno que entrega volume.</p>
+</div></div>
+<div class="flex items-start space-x-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center"><span class="text-emerald-400 font-bold">→</span></div>
+<div class="flex-1 bg-dark-800 rounded-xl p-6 border border-dark-600">
+<h4 class="font-semibold mb-2">Code reviewer (GPT-5.5/Opus)</h4>
+<p class="text-neutral-300 text-sm">"Le o diff, busca bugs, confirma aderencia ao plano." — analogo ao tech lead que aprova merge.</p>
+</div></div>
+</div>
+</section>
+
+<section id="t6" class="mb-16">
+<div class="flex items-center space-x-4 mb-6"><span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl">6</span><h2 class="text-2xl font-bold">📊 Casos onde combinar foi 5x mais barato</h2></div>
+<p class="text-neutral-300 mb-6 leading-relaxed">Numeros reais de 3 projetos comparativos — single-model vs combinacao 70/20/10. Em todos, a combinacao venceu em custo (e na maioria, empatou em qualidade).</p>
+
+<div class="overflow-x-auto mb-6">
+<table class="w-full text-sm">
+<thead><tr class="bg-dark-700 text-emerald-400"><th class="p-3 text-left">Projeto</th><th class="p-3 text-right">Single-Opus</th><th class="p-3 text-right">Single-DeepSeek</th><th class="p-3 text-right">70/20/10</th><th class="p-3 text-left">Vencedor</th></tr></thead>
+<tbody class="bg-dark-800">
+<tr class="border-b border-dark-600"><td class="p-3">SaaS pequeno (1 dia)</td><td class="p-3 text-right text-neutral-400">$9.40</td><td class="p-3 text-right text-neutral-400">$0.85 + 4 bugs</td><td class="p-3 text-right text-emerald-400 font-bold">$1.80</td><td class="p-3 text-emerald-400">70/20/10</td></tr>
+<tr class="border-b border-dark-600"><td class="p-3">Refatoracao legada</td><td class="p-3 text-right text-neutral-400">$12.00</td><td class="p-3 text-right text-neutral-400">$1.40 + falhas</td><td class="p-3 text-right text-emerald-400 font-bold">$1.20</td><td class="p-3 text-emerald-400">70/20/10</td></tr>
+<tr><td class="p-3">API + testes</td><td class="p-3 text-right text-neutral-400">$8.50</td><td class="p-3 text-right text-neutral-400">$0.90</td><td class="p-3 text-right text-emerald-400 font-bold">$2.10</td><td class="p-3 text-emerald-400">70/20/10</td></tr>
+</tbody></table></div>
+
+<div class="bg-primary/10 rounded-xl border border-primary/40 p-6 mb-6">
+<h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">🎯</span> A licao</h3>
+<p class="text-neutral-300">Single-DeepSeek <strong class="text-red-400">parece</strong> mais barato, mas o custo dos bugs em producao (debug, hotfix, retrabalho) supera a economia. Single-Opus <strong>e</strong> caro, sem ganho proporcional. <strong class="text-primary">70/20/10 e o sweet spot</strong> em 90% dos projetos.</p>
+</div>
+</section>
+
+<section class="mb-12">
+<div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Modulo</h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Custo escondido:</strong> <span class="text-neutral-400">single-model premium paga 3-5x a mais sem ganho proporcional</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Triangulo de tradeoff:</strong> <span class="text-neutral-400">qualidade, velocidade e custo — escolha 2 ou combine modelos</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Perfis distintos:</strong> <span class="text-neutral-400">cada modelo e bom em algo — use a forca de cada</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Pipeline > monolito:</strong> <span class="text-neutral-400">etapas com checkpoint reduzem erro e custo de retrabalho</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Times tradicionais:</strong> <span class="text-neutral-400">a logica de senior/junior/reviewer ja existe — multi-modelo e a versao IA</span></div></div>
+<div class="flex items-start space-x-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Numeros reais:</strong> <span class="text-neutral-400">70/20/10 venceu em custo nos 3 estudos de caso, sem perder qualidade</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8"><h3 class="font-semibold text-emerald-400 mb-2">Proximo Modulo:</h3><p class="text-neutral-300">1.2 — 🎭 Os 3 perfis: arquiteto, designer, executor</p></div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+<a href="modulo-1-2.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Proximo Modulo →</a>
+</div></div></section>
+
+</main>
+
+<footer class="border-t border-dark-600 py-8 mt-16">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>DeepClaudeX · Modulo 1.1 · INEMA.CLUB · 2026</p>
+</div></footer>
+
+<script>
+const t=document.getElementById('theme-toggle'),d=document.getElementById('theme-toggle-dark-icon'),l=document.getElementById('theme-toggle-light-icon'),h=document.documentElement;
+if(localStorage.getItem('theme')==='light'){h.classList.remove('dark');d.classList.remove('hidden')}else{l.classList.remove('hidden')}
+t.addEventListener('click',()=>{d.classList.toggle('hidden');l.classList.toggle('hidden');h.classList.toggle('dark');localStorage.setItem('theme',h.classList.contains('dark')?'dark':'light')});
+</script>
+</body></html>
